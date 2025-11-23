@@ -44,7 +44,7 @@ window.onload=function(){
     requestAnimationFrame(update);
     setInterval(setPipes,1500);
     window.addEventListener("keydown",moveBird);
-    window.addEventListener("touchstart", moveBird);
+    canvas.addEventListener("touchstart", moveBird);
 }
 function update(){
     if(gameOver){
@@ -116,3 +116,4 @@ function checkColision(a,b){
     a.y+a.height>b.y
 
 }
+
