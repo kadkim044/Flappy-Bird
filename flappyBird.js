@@ -105,7 +105,7 @@ function setPipes(){
     pipes.push(bottomPipe);
 }
 function moveBird(e){
-    if(e.code==="Space"||e.code==="ArrowUp"){
+    if(e.code==="Space"||e.code==="ArrowUp"||e.type === "touchstart"){
         velocityY=-6;
     }
 }
@@ -116,4 +116,5 @@ function checkColision(a,b){
     a.y+a.height>b.y
 
 }
+
 
