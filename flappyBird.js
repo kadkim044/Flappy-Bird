@@ -44,7 +44,7 @@ window.onload=function(){
     requestAnimationFrame(update);
     setInterval(setPipes,1500);
     window.addEventListener("keydown",moveBird);
-    document.addEventListener("touchstart", moveBird);
+    canvas.addEventListener("click", moveBirdA);
 }
 function update(){
     if(gameOver){
@@ -105,9 +105,12 @@ function setPipes(){
     pipes.push(bottomPipe);
 }
 function moveBird(e){
-    if(e.code==="Space"||e.code==="ArrowUp"||e.type === "touchstart"){
+    if(e.code==="Space"||e.code==="ArrowUp"){
         velocityY=-6;
     }
+}
+function moveBirdA(){
+    velocityY=-6;
 }
 function checkColision(a,b){
     return a.x<b.x+b.width&&
@@ -116,6 +119,7 @@ function checkColision(a,b){
     a.y+a.height>b.y
 
 }
+
 
 
 
