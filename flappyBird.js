@@ -110,13 +110,19 @@ function moveBird(e){
     if(e.code==="Space"||e.code==="ArrowUp"){
         velocityY=-6;
         wingSound.currentTime=0;
-        wingSound.play()
+        wingSound.play();
+        if(gameOver){
+        gameOver=false;
+        }
     }
 }
 function moveBirdA(){
     velocityY=-6;
     wingSound.currentTime=0;
-    wingSound.play()
+    wingSound.play();
+    if(gameOver){
+        gameOver=false;
+    }
 }
 function checkColision(a,b){
     return a.x<b.x+b.width&&
@@ -125,3 +131,4 @@ function checkColision(a,b){
     a.y+a.height>b.y
 
 }
+
