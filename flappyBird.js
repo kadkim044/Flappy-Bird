@@ -151,6 +151,19 @@ function moveBirdA(){
     velocityY=-6;
     wingSound.currentTime=0;
     wingSound.play()
+    if(bgSound.paused){
+        bgSound.currentTime=0;
+        bgSound.play();
+    }
+    bgSound.play();
+
+    if (gameOver) {
+        bird.y = birdY;
+        pipes = [];
+        score = 0;
+        gameOver = false;
+        update()
+    }
 }
 function checkColision(a,b){
     return a.x<b.x+b.width&&
