@@ -24,7 +24,12 @@ let bird={
     width:birdWidth,
     height:birdHeight,
 }
-let wingSound=new Audio("./sfx_wing.wav")
+let wingSound=new Audio("./sfx_wing.wav");
+let hitSound=new Audio("./sfx_hit.wav");
+let fallSound=new Audio("./sfx_die.wav");
+let scoreSound=new Audio("./sfx_point.wav");
+let bgSound=new Audio("./bgm_mario.mp3");
+
 let score=0;
 let velocityY=0;
 let pipes=[];
@@ -61,7 +66,9 @@ function update(){
     velocityY+=gravity
     ctx.drawImage(birdImg,bird.x,bird.y,bird.width,bird.height);
     if(bird.y+bird.width>gameHeight){
-        gameOver=true
+        gameOver=true;
+        fallSound.currentTime=0;
+        fallSound.play()
     }
     for(let i=0;i<pipes.length;i++){
         let pipe=pipes[i];
@@ -70,9 +77,13 @@ function update(){
         if(!pipe.passed&&bird.x>pipe.x+pipe.width){
             score+=0.5;
             pipe.passed=true
+            scoreSound.currentTime=0;
+            scoreSound.play()
         }
         if(checkColision(bird,pipe)){
             gameOver=true;
+            hitSound.currentTime=0
+            hitSound.play()
         }
         
     }
@@ -111,25 +122,20 @@ function moveBird(e){
         velocityY=-6;
         wingSound.currentTime=0;
         wingSound.play();
-        if (gameOver) {
-            bird.y = birdY;
-            pipes = [];
-            score = 0;
-            gameOver = false;
-        }
+        bgSound.play()
     }
-}
-function moveBirdA(){
-    velocityY=-6;
-    wingSound.currentTime=0;
-    wingSound.play();
     if (gameOver) {
             bird.y = birdY;
             pipes = [];
             score = 0;
             gameOver = false;
         }
-
+    
+}
+function moveBirdA(){
+    velocityY=-6;
+    wingSound.currentTime=0;
+    wingSound.play()
 }
 function checkColision(a,b){
     return a.x<b.x+b.width&&
@@ -138,6 +144,3 @@ function checkColision(a,b){
     a.y+a.height>b.y
 
 }
-
-
-
