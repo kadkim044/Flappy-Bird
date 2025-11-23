@@ -146,6 +146,7 @@ function moveBirdA(){
         bgSound.currentTime=0;
         bgSound.play();
     }
+    bgSound.play();
     if (gameOver) {
             bird.y = birdY;
             pipes = [];
@@ -161,4 +162,5 @@ function checkColision(a,b){
     a.y+a.height>b.y
 
 }
+
 
