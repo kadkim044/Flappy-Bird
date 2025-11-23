@@ -113,7 +113,7 @@ function moveBird(e){
         wingSound.play();
         if (gameOver) {
             bird.y = birdY;
-            pipeArray = [];
+            pipes = [];
             score = 0;
             gameOver = false;
         }
@@ -125,7 +125,7 @@ function moveBirdA(){
     wingSound.play();
     if (gameOver) {
             bird.y = birdY;
-            pipeArray = [];
+            pipes = [];
             score = 0;
             gameOver = false;
         }
@@ -138,5 +138,6 @@ function checkColision(a,b){
     a.y+a.height>b.y
 
 }
+
 
 
