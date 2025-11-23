@@ -111,8 +111,11 @@ function moveBird(e){
         velocityY=-6;
         wingSound.currentTime=0;
         wingSound.play();
-        if(gameOver){
-        gameOver=false;
+        if (gameOver) {
+            bird.y = birdY;
+            pipeArray = [];
+            score = 0;
+            gameOver = false;
         }
     }
 }
@@ -120,9 +123,13 @@ function moveBirdA(){
     velocityY=-6;
     wingSound.currentTime=0;
     wingSound.play();
-    if(gameOver){
-        gameOver=false;
-    }
+    if (gameOver) {
+            bird.y = birdY;
+            pipeArray = [];
+            score = 0;
+            gameOver = false;
+        }
+
 }
 function checkColision(a,b){
     return a.x<b.x+b.width&&
@@ -131,4 +138,5 @@ function checkColision(a,b){
     a.y+a.height>b.y
 
 }
+
 
