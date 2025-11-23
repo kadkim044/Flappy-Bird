@@ -1,4 +1,3 @@
-
 let canvas;
 let ctx;
 const gameWidth=360;
@@ -29,7 +28,7 @@ let hitSound=new Audio("./sfx_hit.wav");
 let fallSound=new Audio("./sfx_die.wav");
 let scoreSound=new Audio("./sfx_point.wav");
 let bgSound=new Audio("./bgm_mario.mp3");
-
+bgSound.loop=true;
 let score=0;
 let velocityY=0;
 let pipes=[];
@@ -58,6 +57,7 @@ function update(){
         ctx.font="40px Arial";
         ctx.fillStyle="red";
         ctx.fillText("Game Over",gameWidth/4,gameHeight/2);
+        bgSound.pause()
         return;
     }
     requestAnimationFrame(update);
@@ -122,14 +122,20 @@ function moveBird(e){
         velocityY=-6;
         wingSound.currentTime=0;
         wingSound.play();
-        bgSound.play()
-    }
-    if (gameOver) {
+        if(bgSound.paused){
+            bgSound.currentTime=0;
+            bgSound.play();
+        }
+        bgSound.play();
+        
+        if (gameOver) {
             bird.y = birdY;
             pipes = [];
             score = 0;
             gameOver = false;
+            update()
         }
+    }
     
 }
 function moveBirdA(){
