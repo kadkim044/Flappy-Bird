@@ -43,7 +43,8 @@ window.onload=function(){
     bottomPipeImg.src="./bottompipe.png";
     requestAnimationFrame(update);
     setInterval(setPipes,1500);
-    window.addEventListener("keydown",moveBird)
+    window.addEventListener("keydown",moveBird);
+    document.addEventListener("touchstart", moveBird);
 }
 function update(){
     if(gameOver){
