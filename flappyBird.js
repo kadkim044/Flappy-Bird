@@ -1,3 +1,4 @@
+
 let canvas;
 let ctx;
 const gameWidth=360;
@@ -17,6 +18,8 @@ let pipeHeight=512;
 let topPipeImg;
 let bottomPipeImg;
 let gravity=0.4;
+let birdAnimation=[];
+let birdAnimationIndex=0;
 let bird={
     x:birdX,
     y:birdY,
@@ -38,17 +41,19 @@ window.onload=function(){
     ctx=canvas.getContext("2d");
     canvas.width=gameWidth;
     canvas.height=gameHeight;
-    birdImg=new Image();
-    birdImg.src="./flappybird.png";
-    birdImg.onload=function(){
-        ctx.drawImage(birdImg,bird.x,bird.y,bird.width,bird.height)
+    for(let i=0;i<4;i++){
+    let birdImgg=new Image();
+    birdImgg.src=`./flappybird${i}.png`
+    birdAnimation.push(birdImgg);
     }
+    ctx.drawImage(birdAnimation[birdAnimationIndex],bird.x,bird.y,bird.width,bird.height);
     topPipeImg=new Image();
     topPipeImg.src="./toppipe.png";
     bottomPipeImg= new Image();
     bottomPipeImg.src="./bottompipe.png";
     requestAnimationFrame(update);
     setInterval(setPipes,1500);
+    setInterval(drawBird,100)
     window.addEventListener("keydown",moveBird);
     canvas.addEventListener("click", moveBirdA);
 }
@@ -64,7 +69,7 @@ function update(){
     ctx.clearRect(0,0,gameWidth,gameHeight);
     bird.y=Math.max(bird.y+velocityY,0);
     velocityY+=gravity
-    ctx.drawImage(birdImg,bird.x,bird.y,bird.width,bird.height);
+    ctx.drawImage(birdAnimation[birdAnimationIndex],bird.x,bird.y,bird.width,bird.height);
     if(bird.y+bird.width>gameHeight){
         gameOver=true;
         fallSound.currentTime=0;
@@ -93,6 +98,10 @@ function update(){
     ctx.font="40px MV Bali";
     ctx.fillStyle="green";
     ctx.fillText(score,5,45)
+}
+function drawBird(){
+    birdAnimationIndex++;
+    birdAnimationIndex%=3
 }
 function setPipes(){
     if(gameOver) return;
@@ -141,19 +150,7 @@ function moveBird(e){
 function moveBirdA(){
     velocityY=-6;
     wingSound.currentTime=0;
-    wingSound.play();
-    if(bgSound.paused){
-        bgSound.currentTime=0;
-        bgSound.play();
-    }
-    bgSound.play();
-    if (gameOver) {
-            bird.y = birdY;
-            pipes = [];
-            score = 0;
-            gameOver = false;
-            update()
-        }
+    wingSound.play()
 }
 function checkColision(a,b){
     return a.x<b.x+b.width&&
@@ -162,5 +159,3 @@ function checkColision(a,b){
     a.y+a.height>b.y
 
 }
-
-
