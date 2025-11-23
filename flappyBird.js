@@ -1,3 +1,4 @@
+
 let canvas;
 let ctx;
 const gameWidth=360;
@@ -23,6 +24,7 @@ let bird={
     width:birdWidth,
     height:birdHeight,
 }
+let wingSound=new Audio("./sfx_wing.wav")
 let score=0;
 let velocityY=0;
 let pipes=[];
@@ -107,10 +109,14 @@ function setPipes(){
 function moveBird(e){
     if(e.code==="Space"||e.code==="ArrowUp"){
         velocityY=-6;
+        wingSound.currentTime=0;
+        wingSound.play()
     }
 }
 function moveBirdA(){
     velocityY=-6;
+    wingSound.currentTime=0;
+    wingSound.play()
 }
 function checkColision(a,b){
     return a.x<b.x+b.width&&
@@ -119,7 +125,3 @@ function checkColision(a,b){
     a.y+a.height>b.y
 
 }
-
-
-
-
